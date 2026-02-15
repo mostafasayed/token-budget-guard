@@ -1,11 +1,11 @@
-import { TokenBudgetOptions } from "./types";
+import { TokenBudgetOptions, TokenBudgetResult } from "./types";
 import { calculateTokenUsage } from "./budget";
 import { estimateTokens } from "./tokenizer";
 import { trimContext } from "./strategies";
 
 export async function withTokenBudget<T>(
     opts: TokenBudgetOptions<T>
-): Promise<T> {
+): Promise<TokenBudgetResult<T>> {
     const {
         prompt,
         context = [],
@@ -22,12 +22,14 @@ export async function withTokenBudget<T>(
     );
 
     if (usage.totalTokens <= maxTokens) {
-        return call({ prompt, context, expectedOutputTokens });
+        const result = await call({ prompt, context, expectedOutputTokens });
+        return { result, usage };
     }
 
     if (strategy === "warn_only") {
         console.warn("[token-budget] exceeded", usage);
-        return call({ prompt, context, expectedOutputTokens });
+        const result = await call({ prompt, context, expectedOutputTokens });
+        return { result, usage };
     }
 
     if (strategy === "trim_context") {
@@ -54,11 +56,13 @@ export async function withTokenBudget<T>(
             );
         }
 
-        return call({
+        const result = await call({
             prompt,
             context: trimmedContext,
             expectedOutputTokens,
         });
+
+        return { result, usage: trimmedUsage };
     }
 
     throw new Error(

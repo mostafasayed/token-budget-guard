@@ -1,8 +1,19 @@
 {
   "name": "token-budget-guard",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "funding": {
+    "type": "buymeacoffee",
+    "url": "https://buymeacoffee.com/mostafahanafy"
+  },
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "npm run build"
@@ -10,7 +21,21 @@
   "files": [
     "dist"
   ],
-  "keywords": [],
+  "keywords": [
+    "llm",
+    "openai",
+    "token",
+    "ai",
+    "cost-control",
+    "budget",
+    "gpt",
+    "anthropic",
+    "ai-utilities"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mostafasayed/token-budget-guard"
+  },
   "author": "Mostafa Hanafy",
   "license": "MIT",
   "devDependencies": {
