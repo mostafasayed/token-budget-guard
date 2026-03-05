@@ -1,6 +1,6 @@
 {
   "name": "token-budget-guard",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
@@ -16,7 +16,9 @@
   },
   "scripts": {
     "build": "tsc",
-    "prepublishOnly": "npm run build"
+    "test": "vitest run",
+    "prepublishOnly": "npm run build",
+    "prepare": "npm run build"
   },
   "files": [
     "dist"
@@ -34,16 +36,25 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/mostafasayed/token-budget-guard"
+    "url": "https://github.com/mostafasayed/token-budget-guard.git"
   },
   "author": "Mostafa Hanafy",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^25.2.2",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^3.0.0"
   },
   "dependencies": {
     "tsx": "^4.21.0"
-  }
+  },
+  "description": "Control token usage before expensive AI API calls",
+  "directories": {
+    "test": "tests"
+  },
+  "bugs": {
+    "url": "https://github.com/mostafasayed/token-budget-guard/issues"
+  },
+  "homepage": "https://github.com/mostafasayed/token-budget-guard#readme"
 }
